@@ -18,10 +18,9 @@ def obtener_datos_pokemon():
         tipos = ", ".join([tipo["type"]["name"].capitalize() for tipo in datos["types"]])
         url_imagen = datos["sprites"]["front_default"]
 
-        # Mostrar la información en la interfaz
+
         etiqueta_resultado.config(text=f"Nombre: {nombre}\nID: {id_pokemon}\nAltura: {altura}\nPeso: {peso}\nTipo(s): {tipos}")
 
-        # Cargar y mostrar la imagen del Pokémon
         imagen_respuesta = requests.get(url_imagen)
         imagen_bytes = Image.open(BytesIO(imagen_respuesta.content))
         imagen = ImageTk.PhotoImage(imagen_bytes)
@@ -31,12 +30,10 @@ def obtener_datos_pokemon():
         etiqueta_resultado.config(text="Pokémon no encontrado.")
         etiqueta_imagen.config(image="")
 
-# Crear la ventana principal
 ventana = tk.Tk()
 ventana.title("Pokedex")
 ventana.geometry("300x400")
 
-# Elementos de la interfaz
 Label(ventana, text="Introduce el nombre del Pokémon:").pack()
 entrada = Entry(ventana)
 entrada.pack()
@@ -49,5 +46,4 @@ etiqueta_resultado.pack()
 etiqueta_imagen = Label(ventana)
 etiqueta_imagen.pack()
 
-# Ejecutar la aplicación
 ventana.mainloop()
